@@ -22,7 +22,7 @@ class Polargraph():
   # State
   ready = False
   file_position = 0
-  total_lines = 0
+  total_lines = 0¡
 
   def start_serial_comms(self, comm_port, baud_rate=57600):
     """
