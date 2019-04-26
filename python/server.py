@@ -22,8 +22,8 @@ def apply_caching(response):
 def home():
   return jsonify({ 'data': 'ok' })
 
-@app.route('/pen-down')
-def pen_down():
+@app.route('/pen-up')
+def pen_up():
   polargraph.serial_port.write("C14,END\n")
   return jsonify({ 'data': 'ok' })
 
