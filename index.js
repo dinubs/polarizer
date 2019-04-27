@@ -6,7 +6,9 @@ const { parse } = require('url');
 const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
+const HOST = process.env.HOST || '0.0.0.0';
+const PORT = process.env.NODE_PORT || 80;
+const app = next({ dev, hostname: HOST });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
@@ -17,27 +19,33 @@ app.prepare().then(() => {
     const { pathname, query } = parsedUrl;
 
     if (pathname.indexOf('/api') === 0) {
-      const options = {
-        hostname: 'localhost',
-        port: 5000,
-        path: req.url.replace('/api', ''),
-      };
-
-      const proxy = request(options, function (response) {
-        res.writeHead(response.statusCode, response.headers);
-        response.pipe(res, {
-          end: true
-        });
-      });
-
-      return req.pipe(proxy, {
-        end: true
-      });
+      return proxyApi(req, res);
     } else {
       return handle(req, res);
     }
-  }).listen(80, err => {
+  }).listen(PORT, HOST, err => {
     if (err) throw err;
-    console.log('> Ready on http://localhost:3000');
+    console.log(`> Ready on http://localhost:${PORT}`);
   });
 });
+
+function proxyApi(req, res) {
+  const options = {
+    hostname: 'localhost',
+    port: 5000,
+    path: req.url.replace('/api', ''),
+    headers: req.headers,
+    method: req.method,
+  };
+
+  const proxy = request(options, function (response) {
+    res.writeHead(response.statusCode, response.headers);
+    response.pipe(res, {
+      end: true
+    });
+  });
+
+  return req.pipe(proxy, {
+    end: true
+  });
+}
