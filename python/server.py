@@ -10,7 +10,7 @@ polargraph = Polargraph()
 polargraph.start_serial_comms(comm_port="/dev/ttyACM0")
 
 # Create the application instance
-app = Flask(__name__, template_folder="templates")
+app = Flask(__name__)
 
 @app.after_request
 def apply_caching(response):

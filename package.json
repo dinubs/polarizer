@@ -1,0 +1,27 @@
+{
+  "name": "polarizer",
+  "version": "1.0.0",
+  "description": "This is a Python server and NextJS server combo that allows you to interact with a Polargraph machine.",
+  "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "next": "^8.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinubs/polarizer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dinubs/polarizer/issues"
+  },
+  "homepage": "https://github.com/dinubs/polarizer#readme"
+}
