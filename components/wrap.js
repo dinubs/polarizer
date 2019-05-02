@@ -5,9 +5,12 @@ import Sidebar from "./sidebar";
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    width: '100%',
   },
   paper: {
-    margin: theme.spacing.unit,
+    boxSizing: 'border-box',
+    marginBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
   },
 });
@@ -16,7 +19,7 @@ function Wrap(props) {
   const { classes } = props;
 
   return (
-    <Grid container className={classes.root} spacing={16}>
+    <Grid container className={classes.root} spacing={32}>
       <Grid item xs={2}>
         <Sidebar />
       </Grid>
