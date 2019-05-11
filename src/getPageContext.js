@@ -10,6 +10,10 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  paper: {
+    boxSizing: 'border-box',
+    padding: 16,
+  },
 });
 
 function createPageContext() {

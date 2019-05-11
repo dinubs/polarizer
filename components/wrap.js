@@ -9,22 +9,25 @@ const styles = theme => ({
   },
   paper: {
     boxSizing: 'border-box',
-    marginBottom: theme.spacing.unit * 2,
-    marginTop: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 2,
   },
+  body: {
+    marginBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
+  }
 });
 
 function Wrap(props) {
-  const { classes } = props;
+  const { classes, header } = props;
 
   return (
     <Grid container className={classes.root} spacing={32}>
       <Grid item xs={2}>
         <Sidebar />
       </Grid>
-      <Grid item xs={10}>
-        <Paper className={classes.paper} >
+      <Grid className={classes.body} item xs={10}>
+        {header}
+        <Paper className={props.classes.paper}>
           {props.children}
         </Paper>
       </Grid>

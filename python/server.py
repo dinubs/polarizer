@@ -1,7 +1,8 @@
 from flask import (
   Flask,
   render_template,
-  jsonify
+  jsonify,
+  request
 )
 
 from controller import Polargraph
@@ -21,6 +22,15 @@ def apply_caching(response):
 @app.route('/')
 def home():
   return jsonify({ 'data': 'ok' })
+
+@app.route('/direct')
+def direct():
+  command = request.args.get('command')
+  if not command:
+    return jsonify({ 'error': 'no command'}), 422
+
+  polargraph.serial_port.write('{}\n'.format(command))
+  return jsonify({ 'data': 'ok', 'command': command })
 
 @app.route('/pen-up')
 def pen_up():
